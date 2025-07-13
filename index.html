@@ -146,6 +146,43 @@
     }
   });
     </script>
+  <h3>📡 AVD Live Price (Demo)</h3>
+<p id="price" style="font-size: 28px; font-weight: bold;">Loading...</p>
+</section> 
+
+  <script>
+  let price = 0.0100;
+
+  function updatePrice() {
+    // Simulate price movement between -0.0010 and +0.0010
+    let change = (Math.random() * 0.002 - 0.001).toFixed(4);
+    let newPrice = (parseFloat(price) + parseFloat(change)).toFixed(4);
+
+    // Prevent price from going below 0.0010
+    if (newPrice < 0.0010) newPrice = 0.0010;
+
+    const priceElement = document.getElementById("price");
+
+    // Change color based on price movement
+    if (newPrice > price) {
+      priceElement.style.color = "green";
+      priceElement.innerHTML = `🔼 $${newPrice} USD`;
+    } else if (newPrice < price) {
+      priceElement.style.color = "red";
+      priceElement.innerHTML = `🔽 $${newPrice} USD`;
+    } else {
+      priceElement.style.color = "gray";
+      priceElement.innerHTML = `$${newPrice} USD`;
+    }
+
+    // Save new price
+    price = newPrice;
+  }
+
+  updatePrice();
+  setInterval(updatePrice, 5000);
+  </script>
+  
   <section>
     <h2>Mission & Vision</h2>
     <p><strong>Mission:</strong> To create a fast, borderless, and people-powered currency that empowers trade, financial freedom, and economic growth in Myanmar and Southeast Asia.</p>
