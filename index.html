@@ -34,7 +34,43 @@
     <h1>AVODA (AVD)</h1>
     <p>Myanmar’s Digital Currency for Financial Freedom</p>
   </header>
+  <section id="avoda-price" style="max-width: 400px; margin: 60px auto; background: #0a0f27; color: #fff; border-radius: 12px; padding: 30px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h2 style="margin-bottom: 20px; font-size: 28px;">🚀 AVODA Token Price</h2>
+  <div style="font-size: 48px; font-weight: bold;" id="price">$0.025</div>
+  <div style="margin: 10px 0; font-size: 16px; color: #88c0ff;">
+    Market Cap: <span id="marketcap">$250,000,000</span><br>
+    Circulating Supply: <span id="supply">1,000,000,000 AVD</span><br>
+    24h Volume: <span id="volume">$5,000,000</span>
+  </div>
+  <div id="change" style="font-size: 18px; margin-top: 15px;">
+    <span style="color: #4caf50;">▲ +3.5%</span> (24h)
+  </div>
+  <button onclick="alert('Redirecting to buy AVODA...');" style="margin-top: 25px; background: #ffcc00; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; color: #0a0f27; transition: background 0.3s;">
+    Buy AVODA
+  </button>
+</section>
+
+<script>
+// Dummy data update function - later replace with real API calls
+function updateAvodaPrice() {
+  // Simulated data — change randomly for demo
+  let price = (0.02 + Math.random() * 0.01).toFixed(4);
+  let changePercent = (Math.random() * 5 - 2.5).toFixed(2); // -2.5% to +2.5%
+  let isUp = changePercent >= 0;
+
+  document.getElementById('price').textContent = '$' + price;
+  document.getElementById('marketcap').textContent = '$' + (price * 10000000000).toLocaleString(undefined, {maximumFractionDigits: 0});
+  document.getElementById('supply').textContent = '1,000,000,000 AVD';
+  document.getElementById('volume').textContent = '$' + (Math.random() * 10000000).toLocaleString(undefined, {maximumFractionDigits: 0});
   
+  let changeEl = document.getElementById('change');
+  changeEl.innerHTML = `<span style="color: ${isUp ? '#4caf50' : '#e53935'};">${isUp ? '▲' : '▼'} ${Math.abs(changePercent)}%</span> (24h)`;
+}
+
+// Update every 5 seconds
+updateAvodaPrice();
+setInterval(updateAvodaPrice, 5000);
+</script>
   <section>
     <h2>Introduction</h2>
     <p>AVODA is a fast, borderless, and transparent digital currency built to empower Myanmar's economy and people. It offers a solution to inflation, slow payments, and lack of financial inclusion.</p>
