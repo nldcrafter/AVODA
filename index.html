@@ -398,6 +398,11 @@
       <h3>Governments Involved</h3>
       <p style="font-size: 18px;">🇲🇲 Myanmar<br>🇹🇭 Thailand<br>🇱🇦 Laos<br>🇰🇭 Cambodia<br>🇻🇳 Vietnam</p>
     </div>
+<!-- 🔥 Pie chart below -->
+<div style="max-width: 500px; margin: 60px auto;">
+  <canvas id="avodaChart"></canvas>
+</div>
+</section>
 
   </div>
   <div style="max-width: 500px; margin: 60px auto;">
@@ -462,7 +467,57 @@
     }
   });
 </script>
-  
+  <script>
+  const ctx = document.getElementById('avodaChart').getContext('2d');
+  const avodaChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: [
+        'Liquidity (10%)',
+        'Binance (4%)',
+        'Other CEX (6.3%)',
+        'DEX (7%)',
+        'Team (20%)',
+        'Myanmar Banks (20%)',
+        'Myanmar Gov (1%)',
+        'Thailand Gov (0.5%)',
+        'Public (31.2%)'
+      ],
+      datasets: [{
+        data: [10, 4, 6.3, 7, 20, 20, 1, 0.5, 31.2],
+        backgroundColor: [
+          '#4f46e5',
+          '#6366f1',
+          '#818cf8',
+          '#a5b4fc',
+          '#facc15',
+          '#16a34a',
+          '#ef4444',
+          '#06b6d4',
+          '#d1d5db'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: 'white'
+          }
+        },
+        title: {
+          display: true,
+          text: 'AVODA Token Distribution',
+          color: 'white',
+          font: { size: 20 }
+        }
+      }
+    }
+  });
+  </script>
   <section>
     <h2>Mission & Vision</h2>
     <p><strong>Mission:</strong> To create a fast, borderless, and people-powered currency that empowers trade, financial freedom, and economic growth in Myanmar and Southeast Asia.</p>
