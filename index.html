@@ -306,6 +306,96 @@ setInterval(() => {
   loadQuestion();
 </script>
 
+
+  <section style="background:#0f172a; color:white; padding:60px 20px; text-align:center; font-family:'Segoe UI', sans-serif;">
+  <h2 style="font-size:32px;">🎡 Spin to Win AVODA!</h2>
+  <p style="font-size:18px; margin-bottom:30px;">Try your luck and win $AVD rewards instantly!</p>
+  <canvas id="wheel" width="300" height="300" style="border-radius:50%; background:#1e293b; margin-bottom:20px;"></canvas><br>
+  <button onclick="spinWheel()" id="spin-btn" style="padding:12px 24px; font-size:16px; background:#facc15; color:#0f172a; font-weight:bold; border:none; border-radius:8px; cursor:pointer;">🎯 Spin Now</button>
+  <p id="spin-result" style="margin-top:20px; font-size:20px; font-weight:bold; color:#34d399;"></p>
+</section>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+  const canvas = document.getElementById("wheel");
+  const ctx = canvas.getContext("2d");
+
+  const segments = ["50 AVD", "Try Again", "100 AVD", "Mystery Box", "20 AVD", "Try Again"];
+  const colors = ["#facc15", "#f87171", "#34d399", "#60a5fa", "#c084fc", "#f87171"];
+  let currentAngle = 0;
+
+  function drawWheel() {
+    const total = segments.length;
+    const angle = (2 * Math.PI) / total;
+    for (let i = 0; i < total; i++) {
+      ctx.beginPath();
+      ctx.moveTo(150, 150);
+      ctx.fillStyle = colors[i];
+      ctx.arc(150, 150, 150, angle * i, angle * (i + 1));
+      ctx.fill();
+      ctx.save();
+      ctx.translate(150, 150);
+      ctx.rotate(angle * i + angle / 2);
+      ctx.fillStyle = "#0f172a";
+      ctx.font = "bold 16px Segoe UI";
+      ctx.fillText(segments[i], 60, 5);
+      ctx.restore();
+    }
+  }
+
+  drawWheel();
+
+  function spinWheel() {
+    document.getElementById("spin-btn").disabled = true;
+    document.getElementById("spin-result").innerText = "";
+
+    const spinAngle = Math.floor(Math.random() * 360) + 1080; // 3 full spins
+    const duration = 3000;
+    const start = Date.now();
+
+    function animate() {
+      const now = Date.now();
+      const time = now - start;
+      if (time >= duration) {
+        currentAngle += (spinAngle * Math.PI) / 180;
+        currentAngle %= 2 * Math.PI;
+        showResult();
+        return;
+      }
+      const progress = time / duration;
+      const ease = 1 - Math.pow(1 - progress, 3); // ease-out
+      const angle = (spinAngle * ease * Math.PI) / 180;
+      ctx.clearRect(0, 0, 300, 300);
+      ctx.save();
+      ctx.translate(150, 150);
+      ctx.rotate(angle);
+      ctx.translate(-150, -150);
+      drawWheel();
+      ctx.restore();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
+  function showResult() {
+    const total = segments.length;
+    const anglePerSegment = 360 / total;
+    const degrees = (currentAngle * 180) / Math.PI;
+    const index = Math.floor((total - ((degrees % 360) / anglePerSegment)) % total);
+    const result = segments[index];
+
+    document.getElementById("spin-result").innerText = `🎉 You got: ${result}!`;
+    document.getElementById("spin-btn").disabled = false;
+
+    // Fire confetti only if won
+    if (result !== "Try Again") {
+      confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+    }
+  }
+</script>
   
   <section>
   <h2>📊 AVODA Tokenomics</h2>
