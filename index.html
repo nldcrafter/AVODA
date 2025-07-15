@@ -161,6 +161,44 @@ setInterval(() => {
   document.getElementById('community-count').textContent = count;
 }, 6000); // every 6 sec
 </script>
+
+<section id="airdrop" style="background: #0f172a; color: white; padding: 60px 20px; text-align: center; font-family: 'Segoe UI', sans-serif;">
+  <h2 style="font-size: 32px; margin-bottom: 20px;">💸 AVODA Airdrop</h2>
+  <p style="font-size: 18px; max-width: 600px; margin: 0 auto 30px;">
+    Be one of the early supporters! Join the airdrop and claim your free AVODA tokens.
+  </p>
+
+  <form id="airdrop-form" onsubmit="handleAirdrop(event)" style="max-width: 400px; margin: 0 auto;">
+    <input type="text" id="name" placeholder="Your Name" required
+      style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; font-size: 16px;">
+    <input type="text" id="contact" placeholder="Email or Telegram @username" required
+      style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; font-size: 16px;">
+    <button type="submit"
+      style="background: #facc15; color: #0f172a; font-weight: bold; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px;">
+      🚀 Claim Airdrop Spot
+    </button>
+  </form>
+
+  <p id="success-message" style="color: #34d399; margin-top: 20px; display: none; font-weight: bold;">
+    🎉 You’re in! We’ll contact you soon with your AVODA reward.
+  </p>
+</section>
+
+<script>
+  function handleAirdrop(e) {
+    e.preventDefault();
+    // Simulate storing data (you can connect to Google Sheets or database later)
+    const name = document.getElementById('name').value;
+    const contact = document.getElementById('contact').value;
+
+    // Basic validation
+    if (name && contact) {
+      document.getElementById('success-message').style.display = 'block';
+      document.getElementById('airdrop-form').reset();
+    }
+  }
+</script>
+
   
   <section>
   <h2>📊 AVODA Tokenomics</h2>
