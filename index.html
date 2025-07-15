@@ -171,7 +171,7 @@ setInterval(() => {
   <form id="airdrop-form" onsubmit="handleAirdrop(event)" style="max-width: 400px; margin: 0 auto;">
     <input type="text" id="name" placeholder="Your Name" required
       style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; font-size: 16px;">
-    <input type="text" id="contact" placeholder="Email or Telegram @username" required
+    <input type="text" id="contact" placeholder="Email or Telegram" required
       style="width: 100%; padding: 12px; margin-bottom: 15px; border: none; border-radius: 8px; font-size: 16px;">
     <button type="submit"
       style="background: #facc15; color: #0f172a; font-weight: bold; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px;">
@@ -180,22 +180,15 @@ setInterval(() => {
   </form>
 
   <p id="success-message" style="color: #34d399; margin-top: 20px; display: none; font-weight: bold;">
-    🎉 You’re in! We’ll contact you soon with your AVODA reward.
+    🎉 You’re in! We’ll contact you soon.
   </p>
 </section>
 
 <script>
   function handleAirdrop(e) {
     e.preventDefault();
-    // Simulate storing data (you can connect to Google Sheets or database later)
-    const name = document.getElementById('name').value;
-    const contact = document.getElementById('contact').value;
-
-    // Basic validation
-    if (name && contact) {
-      document.getElementById('success-message').style.display = 'block';
-      document.getElementById('airdrop-form').reset();
-    }
+    document.getElementById("success-message").style.display = "block";
+    document.getElementById("airdrop-form").reset();
   }
 </script>
 
