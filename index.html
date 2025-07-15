@@ -209,6 +209,103 @@ setInterval(() => {
     document.getElementById("spots-left").innerText = spotsLeft;
   }
 </script>
+
+<section id="avoda-quiz" style="background:#0f172a; color:white; padding:60px 20px; font-family:'Segoe UI', sans-serif; max-width:600px; margin:40px auto; border-radius:16px;">
+  <h2 style="font-size:32px; margin-bottom:20px; text-align:center;">🧠 AVODA Crypto Quiz</h2>
+  <div id="quiz-container">
+    <div id="question" style="font-size:20px; margin-bottom:20px;"></div>
+    <div id="answers" style="display:flex; flex-direction: column; gap:12px;"></div>
+    <button id="next-btn" style="margin-top: 20px; padding:12px 24px; background:#facc15; border:none; border-radius:8px; color:#0f172a; font-weight:bold; cursor:pointer; display:none;">
+      Next
+    </button>
+    <div id="result" style="margin-top:20px; font-size:22px; font-weight:bold; display:none; text-align:center;"></div>
+  </div>
+</section>
+
+<script>
+  const quizData = [
+    {
+      question: "What does AVODA stand for?",
+      options: ["A Vision Of Digital Advancement", "A Virtual Online Digital Asset", "Advanced Value Of Digital Age", "All Verified Online Digital Assets"],
+      answer: 0
+    },
+    {
+      question: "Which technology powers AVODA's fast transactions?",
+      options: ["Blockchain", "Smart Contracts", "Ripple Protocol", "Quantum Computing"],
+      answer: 2
+    },
+    {
+      question: "Which country is AVODA aiming to represent?",
+      options: ["Thailand", "Singapore", "Myanmar", "Vietnam"],
+      answer: 2
+    },
+    {
+      question: "What is the symbol of AVODA token?",
+      options: ["AVD", "AVO", "AVOCOIN", "AVDA"],
+      answer: 0
+    }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+
+  const questionEl = document.getElementById("question");
+  const answersEl = document.getElementById("answers");
+  const nextBtn = document.getElementById("next-btn");
+  const resultEl = document.getElementById("result");
+
+  function loadQuestion() {
+    nextBtn.style.display = "none";
+    resultEl.style.display = "none";
+    questionEl.textContent = quizData[currentQuestion].question;
+    answersEl.innerHTML = "";
+
+    quizData[currentQuestion].options.forEach((option, index) => {
+      const btn = document.createElement("button");
+      btn.textContent = option;
+      btn.style.padding = "12px";
+      btn.style.border = "none";
+      btn.style.borderRadius = "8px";
+      btn.style.background = "#1e293b";
+      btn.style.color = "white";
+      btn.style.cursor = "pointer";
+      btn.style.textAlign = "left";
+      btn.style.fontSize = "16px";
+
+      btn.addEventListener("click", () => {
+        if (index === quizData[currentQuestion].answer) {
+          score++;
+          btn.style.background = "#22c55e"; // green for correct
+        } else {
+          btn.style.background = "#ef4444"; // red for wrong
+        }
+        Array.from(answersEl.children).forEach(b => b.disabled = true);
+        nextBtn.style.display = "inline-block";
+      });
+      answersEl.appendChild(btn);
+    });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult() {
+    questionEl.style.display = "none";
+    answersEl.style.display = "none";
+    nextBtn.style.display = "none";
+    resultEl.style.display = "block";
+    resultEl.textContent = `🎉 Your score: ${score} / ${quizData.length}`;
+  }
+
+  loadQuestion();
+</script>
+
   
   <section>
   <h2>📊 AVODA Tokenomics</h2>
