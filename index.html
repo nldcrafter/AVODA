@@ -162,10 +162,11 @@ setInterval(() => {
 }, 6000); // every 6 sec
 </script>
 
+<!-- 🎯 AVODA Airdrop Section -->
 <section id="airdrop" style="background: #0f172a; color: white; padding: 60px 20px; text-align: center; font-family: 'Segoe UI', sans-serif;">
-  <h2 style="font-size: 32px; margin-bottom: 20px;">💸 AVODA Airdrop</h2>
-  <p style="font-size: 18px; max-width: 600px; margin: 0 auto 30px;">
-    Be one of the early supporters! Join the airdrop and claim your free AVODA tokens.
+  <h2 style="font-size: 32px; margin-bottom: 10px;">💸 AVODA Airdrop</h2>
+  <p style="font-size: 18px; max-width: 600px; margin: 0 auto 20px;">
+    Be one of the early supporters! Only <span id="spots-left" style="color: #facc15;">200</span> spots left!
   </p>
 
   <form id="airdrop-form" onsubmit="handleAirdrop(event)" style="max-width: 400px; margin: 0 auto;">
@@ -184,11 +185,28 @@ setInterval(() => {
   </p>
 </section>
 
+<!-- 🎊 Confetti Script + JS Logic -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
+  let spotsLeft = 200;
+
   function handleAirdrop(e) {
     e.preventDefault();
+
+    // 🎊 Confetti Animation
+    confetti({
+      particleCount: 120,
+      spread: 100,
+      origin: { y: 0.6 }
+    });
+
+    // ✅ Show success message
     document.getElementById("success-message").style.display = "block";
     document.getElementById("airdrop-form").reset();
+
+    // 🔢 Countdown the spots
+    spotsLeft = Math.max(spotsLeft - 1, 0);
+    document.getElementById("spots-left").innerText = spotsLeft;
   }
 </script>
   
